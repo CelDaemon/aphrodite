@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "aphrodite",
+  "name": "Aphrodite",
+  "environment": "client",
+  "authors": ["CelDaemon"],
+  "version": "1.0-SNAPSHOT",
+  "license": "All Rights Reserved",
+  "description": "Client for the Aphrodite Server",
+  "icon": "assets/aphrodite/icon.png",
+  "entrypoints": {
+    "client": ["net.voidgroup.aphrodite.client.AphroditeClient"],
+    "main": ["net.voidgroup.aphrodite.common.AphroditeCommon"]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.7",
+    "minecraft": "~1.20.4",
+    "java": ">=17",
+    "fabric-api": "*"
+  }
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/client/aphrodite.client.main.iml" filepath="$PROJECT_DIR$/.idea/modules/client/aphrodite.client.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/client/aphrodite.client.test.iml" filepath="$PROJECT_DIR$/.idea/modules/client/aphrodite.client.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/aphrodite.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/aphrodite.common.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/aphrodite.common.test.iml" filepath="$PROJECT_DIR$/.idea/modules/common/aphrodite.common.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/aphrodite.server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/server/aphrodite.server.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/aphrodite.server.test.iml" filepath="$PROJECT_DIR$/.idea/modules/server/aphrodite.server.test.iml" />
+    </modules>
+  </component>
+</project>
