@@ -1,0 +1,44 @@
+plugins {
+    id 'fabric-loom' version '1.5-SNAPSHOT'
+}
+
+version = '1.0-SNAPSHOT'
+group = 'net.voidgroup'
+
+loom {
+    runConfigs.client {
+        ideConfigGenerated = true
+    }
+}
+
+idea {
+    module {
+        excludeDirs.add(file("run"))
+    }
+}
+repositories {
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
+}
+jar {
+    evaluationDependsOn(project(":common").path)
+    from(project(":common").sourceSets["main"].java.destinationDirectory)
+}
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modLocalRuntime "maven.modrinth:modmenu:9.0.0"
+    implementation project(path: ":common", configuration: "namedElements")
+}
+
