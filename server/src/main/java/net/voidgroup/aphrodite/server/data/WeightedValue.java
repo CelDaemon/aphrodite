@@ -3,12 +3,15 @@ package net.voidgroup.aphrodite.server.data;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.PrimitiveCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.util.dynamic.Codecs;
 
 public record WeightedValue<T>(T value, int weight) {
+    public static final int DEFAULT_WEIGHT = 1000;
     public static <T> Codec<WeightedValue<T>> createCodec(PrimitiveCodec<T> valueCodec) {
-        return RecordCodecBuilder.create(instance -> instance.group(
+        return Codecs.either(RecordCodecBuilder.create(instance -> instance.group(
                 valueCodec.fieldOf("value").forGetter((WeightedValue<T> obj) -> obj.value),
-                Codec.INT.optionalFieldOf("weight", 1000).forGetter((WeightedValue<T> obj) -> obj.weight)
-        ).apply(instance, WeightedValue<T>::new));
+                Codecs.createStrictOptionalFieldCodec(Codec.INT, "weight", DEFAULT_WEIGHT).forGetter((WeightedValue<T> obj) -> obj.weight)
+        ).apply(instance, WeightedValue<T>::new)),
+                valueCodec, obj -> new WeightedValue<>(obj, DEFAULT_WEIGHT));
     }
 }

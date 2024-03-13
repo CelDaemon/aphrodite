@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "aphrodite-server",
+  "id": "aphrodite",
   "name": "Aphrodite (Server)",
   "environment": "server",
   "authors": ["CelDaemon"],
