@@ -42,8 +42,7 @@ public class ConfigurationManager implements SimpleSynchronousResourceReloadList
             throw new RuntimeException(e);
         }
         var result = Configuration.CODEC.parse(JsonOps.INSTANCE, object);
-        var error = result.error();
-        error.ifPresentOrElse(configurationPartialResult ->
+        result.error().ifPresentOrElse(configurationPartialResult ->
                         LOGGER.error("Failed to load config - " + configurationPartialResult.message()),
                 () -> configuration = result.result().orElseThrow());
     }
