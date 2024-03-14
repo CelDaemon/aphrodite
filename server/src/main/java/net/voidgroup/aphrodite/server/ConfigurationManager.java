@@ -13,12 +13,15 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.dynamic.Codecs;
 import net.voidgroup.aphrodite.server.data.WeightedList;
+import net.voidgroup.aphrodite.server.feature.CustomMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public class ConfigurationManager implements SimpleSynchronousResourceReloadListener {
@@ -32,6 +35,12 @@ public class ConfigurationManager implements SimpleSynchronousResourceReloadList
     public Identifier getFabricId() {
         return new Identifier("aphrodite", "configuration");
     }
+
+    @Override
+    public Collection<Identifier> getFabricDependencies() {
+        return List.of(CustomMetadata.IconManager.IDENTIFIER);
+    }
+
     @Override
     public void reload(ResourceManager manager) {
         if(Files.notExists(CONFIG_PATH)) return;
@@ -45,6 +54,9 @@ public class ConfigurationManager implements SimpleSynchronousResourceReloadList
         result.error().ifPresentOrElse(configurationPartialResult ->
                         LOGGER.error("Failed to load config - " + configurationPartialResult.message()),
                 () -> configuration = result.result().orElseThrow());
+        configuration.icons.ifPresent(icons -> icons.forEach(icon -> {
+            if(!CustomMetadata.hasIcon(icon.value())) LOGGER.error("Icon with id: " + icon.value() + ", not found");
+        }));
     }
 
     public record Configuration(String mainMessage, Optional<WeightedList<String>> messages, Optional<WeightedList<String>> icons) {
