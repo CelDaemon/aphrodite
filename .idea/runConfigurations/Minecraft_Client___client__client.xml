@@ -1,12 +1,12 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" factoryName="Application" name="Minecraft Client (:client)" singleton="false" type="Application">
-    <option name="MAIN_CLASS_NAME" value="net.fabricmc.devlaunchinjector.Main"/>
-    <module name="aphrodite.client.main"/>
-    <shortenClasspath name="ARGS_FILE"/>
-    <option name="VM_PARAMETERS" value="-Dfabric.dli.config=$PROJECT_DIR$/client/.gradle/loom-cache/launch.cfg -Dfabric.dli.env=client -Dfabric.dli.main=net.fabricmc.loader.impl.launch.knot.KnotClient"/>
-    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/client/run/"/>
+  <configuration default="false" name="Minecraft Client (:client)" type="Application" factoryName="Application" singleton="false">
+    <option name="MAIN_CLASS_NAME" value="net.fabricmc.devlaunchinjector.Main" />
+    <module name="aphrodite.client.main" />
+    <shortenClasspath name="ARGS_FILE" />
+    <option name="VM_PARAMETERS" value="-Dfabric.dli.config=$PROJECT_DIR$/client/.gradle/loom-cache/launch.cfg -Dfabric.dli.env=client -Dfabric.dli.main=net.fabricmc.loader.impl.launch.knot.KnotClient -XX:+AllowEnhancedClassRedefinition" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/client/run/" />
     <method v="2">
-      <option enabled="true" name="Make"/>
+      <option name="Make" enabled="true" />
     </method>
-  <classpathModifications/></configuration>
+  </configuration>
 </component>

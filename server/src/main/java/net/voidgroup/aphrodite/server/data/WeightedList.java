@@ -8,9 +8,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class WeightedList<T> implements Iterable<WeightedValue<T>> {
-    private final List<WeightedValue<T>> values;
+    private List<WeightedValue<T>> values;
     private final int totalWeight;
     public WeightedList(List<WeightedValue<T>> values) {
         this.values = values;
@@ -32,6 +35,15 @@ public class WeightedList<T> implements Iterable<WeightedValue<T>> {
                 .xmap(
                         WeightedList::new,
                         (WeightedList<T> obj) -> obj.values);
+    }
+    public void validate(Predicate<T> predicate, Consumer<T> errorRunnable) {
+        values = values.stream().filter(obj -> {
+            if(!predicate.test(obj.value())) {
+                errorRunnable.accept(obj.value());
+                return false;
+            }
+            return true;
+        }).collect(Collectors.toList());
     }
     @NotNull
     @Override
