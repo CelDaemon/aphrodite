@@ -54,7 +54,7 @@ public class ConfigurationManager implements SimpleSynchronousResourceReloadList
         result.error().ifPresentOrElse(configurationPartialResult ->
                         LOGGER.error("Failed to load config - " + configurationPartialResult.message()),
                 () -> configuration = result.result().orElseThrow());
-        configuration.icons.ifPresent(icons -> icons.validate(icon -> !CustomMetadata.hasIcon(icon), icon -> LOGGER.error("Icon with id: " + icon + ", not found")));
+        configuration.icons.ifPresent(icons -> icons.validate(CustomMetadata::hasIcon, icon -> LOGGER.error("Icon with id: " + icon + ", not found")));
     }
 
     public record Configuration(String mainMessage, Optional<WeightedList<String>> messages, Optional<WeightedList<String>> icons) {
