@@ -4,30 +4,32 @@ import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.server.ServerMetadata;
 
+import java.util.Optional;
+
 public class MinecraftServerEvents {
     public static final Event<ModifyMessage> MODIFY_MESSAGE_EVENT = EventFactory.createArrayBacked(
             ModifyMessage.class, listeners -> () -> {
                 for(var listener : listeners) {
                     var message = listener.modifyMessage();
-                    if(message != null) return message;
+                    if(message.isPresent()) return message;
                 }
-                return null;
+                return Optional.empty();
             }
     );
     public static final Event<ModifyIcon> MODIFY_ICON_EVENT = EventFactory.createArrayBacked(
             ModifyIcon.class, listeners -> () -> {
                 for(var listener : listeners) {
                     var icon = listener.modifyIcon();
-                    if(icon != null) return icon;
+                    if(icon.isPresent()) return icon;
                 }
-                return null;
+                return Optional.empty();
             }
     );
     @FunctionalInterface
     public interface ModifyMessage {
-        String modifyMessage();
+        Optional<String> modifyMessage();
     }
     public interface ModifyIcon {
-        ServerMetadata.Favicon modifyIcon();
+        Optional<ServerMetadata.Favicon> modifyIcon();
     }
 }
