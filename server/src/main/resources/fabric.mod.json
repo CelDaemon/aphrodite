@@ -14,7 +14,7 @@
   "mixins": [
     {
       "environment": "server",
-      "config": "aphrodite-server.mixins.json"
+      "config": "aphrodite.server.mixins.json"
     }
   ],
   "depends": {
